@@ -18,6 +18,19 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          projectbaseDir: .
+          arg: >
+            - Dsonar.projectKey=${{ github.event.repository.name }}
+            - Dsonar.projectName=${{ github.event.repository.name }}
+            - Dsonar.source=.
+            - Dsonar.sourceEncoding=UTF-8
+      - name: SonarQube Quality Gate check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        timeou-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
   build:
     name: Build
     runs-on: ubuntu-20.04
