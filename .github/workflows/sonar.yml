@@ -1,10 +1,10 @@
-#name: Deploy to heroku
+#name: sast-sonar
 #
 #on:
 #  push:
 #    branches:
 #      - master
-#      - dev # debug
+#      - dev
 #  
 #jobs:
   #  sonar:
@@ -30,15 +30,3 @@
   #        timeout-minutes: 5
   #        env:
   #          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            #  deploy-heroku:
-            #    name: Deploy Heroku
-            #    runs-on: ubuntu-latest
-            #    steps:
-            #      - uses: actions/checkout@v2
-            #      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-            #        with:
-            #          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            #          heroku_app_name: "jaliaga-app-vulnerable2022" #Must be unique in Heroku
-            #          heroku_email: "jmfaliaga@gmail.com"
-            #          remote_branch: "master"
-            #          usedocker: true
