@@ -48,6 +48,7 @@ jobs:
           image: image-snyk:${{ github.sha }}
           args: >
             --file=Dockerfile
+            --all-projects
             --severity-threshold=high
       - name: Upload SARIF file
         #if: always()
