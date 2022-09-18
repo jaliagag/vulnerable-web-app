@@ -18,7 +18,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --all-projects --fail-fast
+          args: --all-projects --fail-fast --file=package.json
         #        with:
         #          args: >
         #            --severity-threshold=high
