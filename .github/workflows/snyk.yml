@@ -47,13 +47,9 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           image: image-snyk:${{ github.sha }}
-          run: snyk test --file=Dockerfile --severity-threshold=high --sarif-file-output=snyk-container.sarif ; ls -l ; pwd
-            #          args: >
-            #            #       --file=Dockerfile
-            #            --all-projects
-            #            --severity-threshold=high
+          #run: snyk test --file=Dockerfile --severity-threshold=high --sarif-file-output=snyk-container.sarif
+          run: snyk test --file=Dockerfile --severity-threshold=high 
       - name: Upload SARIF file
-        #if: always()
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: snyk-container.sarif
+          sarif_file: snyk.sarif
