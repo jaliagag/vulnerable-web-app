@@ -40,13 +40,14 @@ jobs:
         run: |
           docker build -t image-snyk:${{ github.sha }} . 
       - name: Snyk
-        run: DEBUG=*snyk* snyk test --file=Dockerfile --severity-threshold=high --sarif-file-output=snyk-container.sarif
+        #run: DEBUG=*snyk* snyk test --file=Dockerfile --severity-threshold=high --sarif-file-output=snyk-container.sarif
         uses: snyk/actions/docker@master
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           image: image-snyk:${{ github.sha }}
+          command: test --file=Dockerfile --severity-threshold=high --sarif-file-output=snyk-container.sarif
             #          args: >
             #            #       --file=Dockerfile
             #            --all-projects
