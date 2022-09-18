@@ -18,7 +18,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          command: snyk test --severity-threshold=high --all-projects --sarif-file-output=snyk-code.sarif
+          args: --all-projects
         #        with:
         #          args: >
         #            --severity-threshold=high
