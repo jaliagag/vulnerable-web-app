@@ -47,7 +47,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           image: image-snyk:${{ github.sha }}
-          command: test --file=Dockerfile --severity-threshold=high --sarif-file-output=snyk-container.sarif
+          run: snyk test --file=Dockerfile --severity-threshold=high --sarif-file-output=snyk-container.sarif ; ls -l ; pwd
             #          args: >
             #            #       --file=Dockerfile
             #            --all-projects
