@@ -4,6 +4,14 @@ on:
   workflow_dispatch:
   workflow_call:
     secrets:
+      HEROKU_API_KEY:
+        required: true
+      SNYK_TOKEN:
+        required: true
+      SONAR_HOST_URL:
+        required: true
+      SONAR_TOKEN:
+        required: true
       HAWK_API_KEY:
         required: true
   push:
@@ -14,6 +22,7 @@ on:
 jobs:
   security-sast:
     uses: ./.github/workflows/sast.yml
+    continue-on-error: true
 
   deploy-heroku:
     name: Deploy Heroku
