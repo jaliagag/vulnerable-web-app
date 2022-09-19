@@ -2,6 +2,13 @@ name: sast
 
 on:
   workflow_call:
+    secrets:
+      SNYK_TOKEN:
+        required: true
+      SONAR_HOST_URL:
+        required: true
+      SONAR_TOKEN:
+        required: true
 
 jobs: 
   checkov:
@@ -39,6 +46,7 @@ jobs:
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
+        continue-on-error: true 
         with:
           image-ref: 'trivy-image:${{ github.sha }}'
           format: 'sarif'
@@ -152,6 +160,7 @@ jobs:
 
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
+        continue-on-error: true 
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
@@ -164,6 +173,7 @@ jobs:
             -Dsonar.sourceEncoding=UTF-8
       - name: SonarQube Quality Gate check
         uses: sonarsource/sonarqube-quality-gate-action@master
+        continue-on-error: true 
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
