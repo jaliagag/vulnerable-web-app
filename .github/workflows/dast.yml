@@ -1,6 +1,10 @@
 name: dast
 
 on:
+  workflow_call:
+    secrets:
+      HAWK_API_KEY:
+        required: true
   push:
     branches:
       - master

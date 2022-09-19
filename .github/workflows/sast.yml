@@ -1,6 +1,7 @@
 name: sast
 
 on:
+  workflow_call:
   push:
     branches:
       - master
