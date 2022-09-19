@@ -22,7 +22,6 @@ on:
 jobs:
   security-sast:
     uses: ./.github/workflows/sast.yml
-    continue-on-error: true
 
   deploy-heroku:
     name: Deploy Heroku
