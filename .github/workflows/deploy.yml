@@ -33,3 +33,4 @@ jobs:
     needs: deploy-heroku
     secrets:
       HAWK_API_KEY: ${{ secrets.HAWK_API_KEY }}
+
