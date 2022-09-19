@@ -12,7 +12,7 @@ on:
   
 jobs:
   security-sast:
-    uses: ./.github/workflows/sast.yml
+    uses: ./.github/workflows/sast.yml@test
 
   deploy-heroku:
     name: Deploy Heroku
@@ -29,7 +29,7 @@ jobs:
           usedocker: true
 
   security-dast:
-    uses: ./.github/workflows/dast.yml
+    uses: ./.github/workflows/dast.yml@test
     needs: deploy-heroku
     secrets:
       HAWK_API_KEY: ${{ secrets.HAWK_API_KEY }}
