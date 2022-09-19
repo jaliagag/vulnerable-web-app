@@ -22,7 +22,6 @@ on:
 jobs:
   security-sast:
     uses: ./.github/workflows/sast.yml
-    continue-on-error: true
     secrets:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       SONAR_HOST_URL:  ${{ secrets.SONAR_HOST_URL }}
