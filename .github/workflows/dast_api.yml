@@ -21,7 +21,7 @@ jobs:
       - name: ZAP Scan
         continue-on-error: true
         run: |
-          docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t https://.herokuapp.com/openapi.json -f openapi
+          docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t https://.herokuapp.com/openapi.json -f openapi -c api-scan.conf
       #   uses: zaproxy/action-api-scan@v0.1.1
       #   with:
       #     token: ${{ secrets.GITHUBTOKEN }}
