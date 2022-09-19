@@ -1,0 +1,46 @@
+name: dast
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+      - test
+
+jobs:
+  DAST-API:
+    name: ZAP API Scan
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: ZAP Scan
+        continue-on-error: true
+        run: |
+          docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t https://jaliaga-app-vulnerable2022.herokuapp.com/ -f openapi -c api-scan.conf
+  
+  stackhawk-hawkscan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3  
+    - uses: stackhawk/hawkscan-action@v2.0.0
+      with:
+        apiKey: ${{ secrets.HAWK_API_KEY }}
+        configurationFiles: stackhawk.yml
+
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: zap-proxy scan
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.4.0
+        with:
+          docker_name: 'owasp/zap2docker-stable'
+          target: 'https://jaliaga-app-vulnerable2022.herokuapp.com/'
+          rules_file_name: ./api-scan.conf

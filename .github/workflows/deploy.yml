@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - master
-#      - dev # debug
+      - test
   
 jobs:
+  security-sast:
+    uses: ./github/workflows/sast.yml
+
   deploy-heroku:
     name: Deploy Heroku
     runs-on: ubuntu-latest
@@ -19,3 +22,6 @@ jobs:
           heroku_email: "jmfaliaga@gmail.com"
           remote_branch: "master"
           usedocker: true
+
+  security-dast:
+    uses: ./github/workflows/dast.yml
