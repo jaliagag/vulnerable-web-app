@@ -22,6 +22,10 @@ on:
 jobs:
   security-sast:
     uses: ./.github/workflows/sast.yml
+    secrets:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      SONAR_HOST_URL:  ${{ secrets.SONAR_HOST_URL }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   deploy-heroku:
     name: Deploy Heroku
