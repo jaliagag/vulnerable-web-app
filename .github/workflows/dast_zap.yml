@@ -10,7 +10,7 @@ jobs:
 
   zap_scan:
     runs-on: ubuntu-latest
-    name: Scan the webapplication
+    name: zap-proxy scan
     steps:
       - name: Checkout
         uses: actions/checkout@v2
